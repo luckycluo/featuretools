@@ -1,5 +1,5 @@
 from __future__ import division
-
+from clickhouse_driver import Client
 from builtins import range, str
 from datetime import datetime, timedelta
 
@@ -114,8 +114,18 @@ class Max(AggregationPrimitive):
 
     def get_function(self):
         return np.max
-
-
+class Max1(AggregationPrimitive):
+    """Finds the maximum non-null value of a numeric feature."""
+    name = "max1"
+    input_types = [Numeric]
+    return_type = None
+    # max_stack_depth = 1
+    stack_on_self = False
+    client = Client('localhost')
+    def get_function(self):
+        def click_house_max(x):
+            return client.execute("select %s from installments_payments group by SK_ID_CURR "%(x))
+        return click_house_max
 class NUnique(AggregationPrimitive):
     """Returns the number of unique categorical variables."""
     name = "num_unique"
