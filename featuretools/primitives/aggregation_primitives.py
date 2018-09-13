@@ -124,7 +124,7 @@ class Max1(AggregationPrimitive):
     client = Client('localhost')
     def get_function(self):
         def click_house_max(x):
-            return self.client.execute("select %s from bureau group by SK_ID_CURR "%(x))
+            return self.client.execute("select max(%s) from bureau group by SK_ID_CURR "%(x))
         return click_house_max
 class NUnique(AggregationPrimitive):
     """Returns the number of unique categorical variables."""
