@@ -14,7 +14,7 @@ class build_ext(_build_ext):
 
 
 setup(
-    name='featuretools_cluo',
+    name='featuretoolscluo',
     version='0.2.1',
     packages=find_packages(),
     package_data={'featuretools': ['config.yaml']},
